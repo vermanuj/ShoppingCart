@@ -1,0 +1,97 @@
+
+  <table class="example-table"
+  matSort matSortActive="product" matSortDisableClear matSortDirection="asc">
+  <tr>
+    <td>
+  <form [formGroup]="form" (ngSubmit)="submit(this)">
+
+  <div class="example-container mat-elevation-z8">
+    <div class="example-loading-shade"
+         *ngIf="isLoadingResults">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    </div>
+
+    <div class="mat-elevation-z8" >
+      <table mat-table [dataSource]="dataSource" class="example-table"
+             matSort matSortActive="product" matSortDisableClear matSortDirection="asc">
+
+        <!-- Product Name Column -->
+        <ng-container matColumnDef="productType">
+          <th mat-header-cell *matHeaderCellDef><b>Product Name</b></th>
+          <td mat-cell *matCellDef="let row">{{row.productType}}</td>
+        </ng-container>
+
+        <!-- Product Price Column -->
+        <ng-container matColumnDef="Make">
+          <th mat-header-cell *matHeaderCellDef><b>Make</b> </th>
+          <td mat-cell *matCellDef="let row"> {{row.Make}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Price">
+          <th mat-header-cell *matHeaderCellDef><b>Price</b></th>
+          <td mat-cell *matCellDef="let row"> {{row.Price}}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="AddToCart">
+
+
+          <th mat-header-cell *matHeaderCellDef><b>Add This To Your Cart</b></th>
+
+          <td mat-cell *matCellDef="let row"><mat-checkbox (change)="isSelected(row, $event)"></mat-checkbox></td>
+
+
+
+        </ng-container>
+        <ng-container matColumnDef="ViewProd">
+            <th mat-header-cell *matHeaderCellDef ><b>View Product</b></th>
+            <td mat-cell *matCellDef="let row"> <button mat-raised-button color="accent" [routerLink]="['/products/', row._id]">View This Product</button></td>
+          </ng-container>
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+</form>
+</td>
+<td>
+    <div class="example-container mat-elevation-z8">
+
+
+        <div class="example-loading-shade"
+             *ngIf="isLoadingResults">
+          <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+        </div>
+
+
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title><h2> Your Cart </h2></mat-card-title>
+             <mat-card-subtitle *ngIf= "this.selectedItems.length > 0">You have selected below items:</mat-card-subtitle>
+             <mat-card-subtitle *ngIf= "this.selectedItems.length == 0">You have not selected any items.</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <dl>
+              <dt ></dt>
+              <dd id = "cartContent"></dd>
+            </dl>
+          </mat-card-content>
+
+
+        </mat-card>
+
+
+      </div>
+
+
+</td>
+</tr>
+</table>
